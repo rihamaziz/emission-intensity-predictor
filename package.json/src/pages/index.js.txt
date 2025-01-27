@@ -1,0 +1,5 @@
+import EmissionIntensityPredictor from '../components/EmissionIntensityPredictor'
+
+export default function Home() {
+  return <EmissionIntensityPredictor />
+}
