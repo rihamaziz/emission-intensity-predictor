@@ -1,9 +1,4 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const EmissionIntensityPredictor = () => {
   const [revenue, setRevenue] = useState('');
@@ -98,56 +93,51 @@ const EmissionIntensityPredictor = () => {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle>Enhanced Emission Intensity Predictor</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
-          <div>
-            <Label>Total Revenue ($)</Label>
-            <Input 
-              type="number" 
-              value={revenue}
-              onChange={(e) => setRevenue(e.target.value)}
-              placeholder="Enter total revenue"
-              className="mt-1"
-            />
-          </div>
-          <div>
-            <Label>S3C1 Percentage (%)</Label>
-            <Input 
-              type="number" 
-              value={s3c1Percentage}
-              onChange={(e) => setS3C1Percentage(e.target.value)}
-              placeholder="Enter S3C1 percentage"
-              className="mt-1"
-            />
-          </div>
+    <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
+      <h2 className="text-2xl font-bold mb-4">Emission Intensity Predictor</h2>
+      <div className="space-y-4">
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Total Revenue ($)</label>
+          <input 
+            type="number"
+            value={revenue}
+            onChange={(e) => setRevenue(e.target.value)}
+            placeholder="Enter total revenue"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          />
         </div>
-      </CardContent>
-      <CardFooter className="flex flex-col space-y-4">
-        <Button onClick={predictEmissionIntensity} className="w-full">
+        <div>
+          <label className="block text-sm font-medium text-gray-700">S3C1 Percentage (%)</label>
+          <input 
+            type="number"
+            value={s3c1Percentage}
+            onChange={(e) => setS3C1Percentage(e.target.value)}
+            placeholder="Enter S3C1 percentage"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          />
+        </div>
+        <button
+          onClick={predictEmissionIntensity}
+          className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        >
           Predict Emission Intensity
-        </Button>
+        </button>
         {result && (
-          <Alert>
-            <AlertDescription>
-              {result.error ? (
-                <p className="text-red-500">{result.error}</p>
-              ) : (
-                <div className="space-y-2">
-                  <p><strong>Company Size:</strong> {result.revenueCat}</p>
-                  <p><strong>S3C1 Category:</strong> {result.s3c1Cat}</p>
-                  <p><strong>Predicted Emission Intensity:</strong> {result.emissionIntensity} tCO2/M$</p>
-                  <p><strong>Prediction Confidence:</strong> {result.confidence}</p>
-                </div>
-              )}
-            </AlertDescription>
-          </Alert>
+          <div className="mt-4 p-4 bg-gray-50 rounded-md">
+            {result.error ? (
+              <p className="text-red-600">{result.error}</p>
+            ) : (
+              <div className="space-y-2">
+                <p><strong>Company Size:</strong> {result.revenueCat}</p>
+                <p><strong>S3C1 Category:</strong> {result.s3c1Cat}</p>
+                <p><strong>Predicted Emission Intensity:</strong> {result.emissionIntensity} tCO2/M$</p>
+                <p><strong>Prediction Confidence:</strong> {result.confidence}</p>
+              </div>
+            )}
+          </div>
         )}
-      </CardFooter>
-    </Card>
+      </div>
+    </div>
   );
 };
 
