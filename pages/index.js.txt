@@ -1,9 +1,7 @@
-import EmissionIntensityPredictor from '../components/EmissionIntensityPredictor'
-
 export default function Home() {
   return (
-    <div className="container mx-auto p-4">
-      <EmissionIntensityPredictor />
+    <div>
+      <h1>Emission Intensity Predictor</h1>
     </div>
   )
 }
